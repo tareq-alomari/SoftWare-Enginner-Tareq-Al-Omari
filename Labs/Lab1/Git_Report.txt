@@ -1,0 +1,59 @@
+تقرير الأوامر المستخدمة في مشروع هندسة البرمجيات العملي
+الطالب: م. طارق العمري
+المهندس المشرف: م. مالك المصنف
+إطار العمل: Django
+
+------------------------------------------
+ إعداد هيكل المشروع:
+------------------------------------------
+cd "E:\INFORMATION TECHNOLOGY\learn programing\Projects_Github"
+mkdir -p SoftWare-Enginner-Tareq-Al-Omari/Labs
+cd SoftWare-Enginner-Tareq-Al-Omari/Labs
+for i in {1..10}; do mkdir "Lab$i"; done
+
+------------------------------------------
+ تهيئة المستودع Git:
+------------------------------------------
+cd ../../SoftWare-Enginner-Tareq-Al-Omari
+git init
+
+------------------------------------------
+✅ إنشاء ملف README احترافي:
+------------------------------------------
+cat > README.md << 'EOF'
+# (محتوى README تمت إضافته هنا)
+EOF
+
+------------------------------------------
+ ربط المشروع مع GitHub:
+------------------------------------------
+git remote add origin https://github.com/tareq-alomari/SoftWare-Enginner-Tareq-Al-Omari.git
+
+------------------------------------------
+ التتبع والرفع:
+------------------------------------------
+git add .
+git commit -m "إضافة هيكل واجب Software Engineering مع المجلدات من Lab1 إلى Lab10"
+git branch -M main
+git push -u origin main
+
+------------------------------------------
+ إضافة ملفات .gitkeep للمجلدات الفارغة:
+------------------------------------------
+for i in {1..10}; do touch Labs/Lab$i/.gitkeep; done
+git add .
+git commit -m "إضافة ملفات .gitkeep للحفاظ على مجلدات Labs"
+git push
+
+------------------------------------------
+ العمل مع الفروع:
+------------------------------------------
+git branch temp
+git checkout temp
+git merge main
+
+------------------------------------------
+ ملاحظات:
+- تم استخدام `.gitkeep` للحفاظ على ظهور مجلدات Labs على GitHub.
+- الفرع `main` هو الأساسي، والفرع `temp` تم إنشاؤه للاختبار.
+- المشروع الآن مرفوع كامل على GitHub ويحتوي على README وهيكل منظم.
