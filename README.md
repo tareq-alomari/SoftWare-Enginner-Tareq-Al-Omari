@@ -1,5 +1,8 @@
 
 
+---
+
+
 ````markdown
 <div align="center">
 
@@ -110,14 +113,4 @@ python manage.py runserver
 
 ---
 
-### ✅ ماذا تفعل الآن:
-
-1. أنشئ أو افتح ملف `README.md` في مجلد المشروع.
-2. انسخ الكود أعلاه والصقه فيه.
-3. ثم قم بتنفيذ الأوامر التالية لرفعه إلى GitHub:
-
-```bash
-git add README.md
-git commit -m "تحديث ملف README.md بشكل احترافي"
-git push origin main
 ```
