@@ -57,3 +57,31 @@ git merge main
 - تم استخدام `.gitkeep` للحفاظ على ظهور مجلدات Labs على GitHub.
 - الفرع `main` هو الأساسي، والفرع `temp` تم إنشاؤه للاختبار.
 - المشروع الآن مرفوع كامل على GitHub ويحتوي على README وهيكل منظم.
+
+
+git cofig  --global user.email "qutabh2@gmail.com"
+git cofig  --global user.user "Tareq"
+
+
+git init 
+git status
+git add 'report.txt'
+git  commit -m 'I added a report file'
+git log
+git checkout 'Number'
+git branch
+git branch 'temp'
+git branch 'temp'
+git switch 'main'
+git switch -c 'temp2'
+git switch -b 'temp3'
+git merge 'temp'
+git ls-files
+git clean -dn
+git ls-files
+git clean -dn
+git clean -df
+git restore 'report.txt'
+git reetore .
+git rm 'report.txt'
+git reset 'temp'
