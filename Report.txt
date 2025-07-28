@@ -1,0 +1,128 @@
+🧾 تقرير أوامر إعداد مشروع Django – Lab2
+اعداد الطالب : طارق العمري 
+اشراف المهندس : مالك المصنف 
+🗂️ المسار:
+bash
+نسخ
+تحرير
+E:\INFORMATION TECHNOLOGY\learn programing\Projects_Github\SoftWare-Enginner-Tareq-Al-Omari\Labs\Lab2
+1️⃣ التنقّل داخل المجلدات:
+bash
+نسخ
+تحرير
+cd E:\INFORMATION TECHNOLOGY\learn programing\Projects_Github\SoftWare-Enginner-Tareq-Al-Omari\Labs
+cd Lab2
+2️⃣ التحقق من وجود الملفات:
+bash
+نسخ
+تحرير
+ls
+3️⃣ التحقق من تثبيت Django:
+bash
+نسخ
+تحرير
+django-admin --version
+❌ لم يتم التعرف على الأمر، لأن Django لم يكن مثبتًا.
+
+4️⃣ تثبيت Django باستخدام pip:
+bash
+نسخ
+تحرير
+pip install django
+✅ تم التثبيت بنجاح، وتم تثبيت الحزم التالية:
+
+django 5.2.4
+
+asgiref 3.9.1
+
+sqlparse 0.5.3
+
+5️⃣ إنشاء مشروع جديد باسم facebook:
+bash
+نسخ
+تحرير
+django-admin startproject facebook
+6️⃣ الانتقال إلى مجلد المشروع:
+bash
+نسخ
+تحرير
+cd facebook
+7️⃣ محاولة إنشاء تطبيق باسم محجوز profile (فشل):
+bash
+نسخ
+تحرير
+python manage.py startapp profile
+❌ الخطأ: الاسم "profile" محجوز لأنه موجود في مكتبة Python.
+
+8️⃣ إعادة المحاولة باستخدام حرف كبير:
+bash
+نسخ
+تحرير
+python manage.py startapp Profile
+9️⃣ إنشاء تطبيقات إضافية:
+bash
+نسخ
+تحرير
+python manage.py startapp market
+python manage.py startapp pages
+python manage.py startapp groups
+🔟 فتح المشروع في Visual Studio Code:
+bash
+نسخ
+تحرير
+code .
+🔁 العودة لمجلد Lab2:
+bash
+نسخ
+تحرير
+cd ..
+🧱 بنية المشروع بعد الإنشاء:
+bash
+نسخ
+تحرير
+tree /F /A
+🔹 الملفات الرئيسية:
+manage.py
+
+db.sqlite3
+
+settings.py
+
+urls.py
+
+asgi.py
+
+wsgi.py
+
+🔹 التطبيقات:
+Profile
+
+market
+
+pages
+
+groups
+
+كل تطبيق يحتوي على:
+
+models.py
+
+views.py
+
+admin.py
+
+urls.py
+
+tests.py
+
+apps.py
+
+مجلد migrations
+
+التطبيق Profile يحتوي أيضًا على:
+
+مجلد templates/profile وفيه:
+
+base.html
+
+home.html
