@@ -84,4 +84,7 @@ git clean -df
 git restore 'report.txt'
 git reetore .
 git rm 'report.txt'
+<<<<<<< HEAD
 git reset 'temp'
+=======
+
