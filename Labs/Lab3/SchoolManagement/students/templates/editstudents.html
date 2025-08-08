@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+</head>
+<body>
+    <h3>if</h3> 
+    {% if total > 250 %} 
+        <p>Ex</p> 
+    {% endif %} 
+
+    <h3>if and else</h3> 
+    {% if total > 250 %} 
+        <p>Ex</p> 
+    {% else %} 
+        <p>Good</p> 
+    {% endif %} 
+
+    <h3>For Loop</h3> 
+    <ul>
+        {% for sub, mark in marks.items %} 
+            <li>{{ sub }} : {{ mark }}</li> 
+        {% endfor %} 
+    </ul>
+    <a href="{% url 'home' %}">Back</a>
+</body>
+</html>

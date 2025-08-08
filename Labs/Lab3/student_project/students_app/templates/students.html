@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>بيانات الطلاب</title>
+    <!-- إضافة Bootstrap لتجميل الجدول -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+
+    <!-- إضافة مكتبة DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .container {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📋 بيانات الطلاب</h2>
+        <table id="studentsTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>الاسم الأول</th>
+                    <th>الاسم الأخير</th>
+                    <th>العمر</th>
+                    <th>الجنس</th>
+                    <th>المرحلة الجامعية</th>
+                    <th>منتظم</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.FirstName }}</td>
+                    <td>{{ student.LastName }}</td>
+                    <td>{{ student.Age }}</td>
+                    <td>{{ student.Gender }}</td>
+                    <td>{{ student.Level }}</td>
+                    <td>{{ student.Status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>عمل المهندس : طارق العمري</h2>
+    </div>
+
+    <!-- مكتبة jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- مكتبة DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- تفعيل البحث والفرز -->
+    <script>
+        $(document).ready(function() {
+            $('#studentsTable').DataTable({
+                "language": {
+                    "search": "🔍 بحث:",
+                    "lengthMenu": "عرض _MENU_ سجلات",
+                    "info": "عرض _START_ إلى _END_ من أصل _TOTAL_ سجل",
+                    "paginate": {
+                        "first": "الأول",
+                        "last": "الأخير",
+                        "next": "التالي",
+                        "previous": "السابق"
+                    },
+                    "zeroRecords": "لم يتم العثور على نتائج"
+                }
+            });
+        });
+    </script>
+</body>
+</html>
