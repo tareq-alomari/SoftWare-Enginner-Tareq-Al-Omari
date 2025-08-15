@@ -1,0 +1,97 @@
+/* SoftWare-Enginner-Tareq-Al-Omari\Labs\Lab4 */
+
+/* المتغيرات والألوان الأساسية */
+:root {
+    --main-color: #2c3e50; /* [cite: 189] */
+}
+
+/* تنسيقات الجسم الرئيسية */
+body {
+    margin: 0; /* [cite: 160] */
+    font-family: Arial, sans-serif; /* [cite: 162] */
+    display: flex; /* [cite: 164] */
+    flex-direction: column; /* [cite: 165] */
+    min-height: 100vh; /* [cite: 167] */
+}
+
+/* شريط التنقل */
+nav {
+    background-color: var(--main-color); /* [cite: 192] */
+    padding: 10px 0; /* [cite: 193] */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul {
+    list-style: none; /* [cite: 195] */
+    display: flex; /* [cite: 196] */
+    justify-content: center; /* [cite: 197] */
+    margin: 0; /* [cite: 199] */
+    padding: 0; /* [cite: 201] */
+}
+
+nav ul li {
+    margin: 0 15px; /* [cite: 207] */
+}
+
+nav ul li a {
+    color: white; /* [cite: 213] */
+    text-decoration: none; /* [cite: 215] */
+    font-weight: bold; /* [cite: 217] */
+}
+
+nav ul li a:hover {
+    text-decoration: underline; /* [cite: 223] */
+}
+
+/* المحتوى الرئيسي */
+main {
+    flex: 1; /* [cite: 231] */
+    padding: 20px; /* [cite: 233] */
+    display: flex; /* [cite: 235] */
+    justify-content: center; /* [cite: 246] */
+    align-items: center; /* [cite: 247] */
+}
+
+/* تنسيق الجداول */
+table {
+    border-collapse: collapse; /* [cite: 249] */
+    width: 80%; /* [cite: 250] */
+    max-width: 800px; /* [cite: 251] */
+    background-color: #f8f9fa; /* [cite: 252] */
+    text-align: center; /* [cite: 253] */
+}
+
+th, td {
+    border: 1px solid #ddd; /* [cite: 177] */
+    padding: 12px; /* [cite: 177] */
+}
+
+th {
+    background-color: #34495e; /* [cite: 177] */
+    color: white; /* [cite: 177] */
+}
+
+tr:nth-child(even) {
+    background-color: #e9ecef; /* [cite: 177] */
+}
+
+/* صندوق الترحيب */
+.welcome-box {
+    background-color: var(--main-color); /* [cite: 177] */
+    color: white; /* [cite: 177] */
+    padding: 50px 80px; /* [cite: 177] */
+    font-size: 24px; /* [cite: 177] */
+    border-radius: 10px; /* [cite: 177] */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* [cite: 177] */
+    text-align: center; /* [cite: 177] */
+}
+
+/* الفوتر */
+footer {
+    background-color: var(--main-color); /* [cite: 177] */
+    color: white; /* [cite: 177] */
+    text-align: center; /* [cite: 177] */
+    padding: 10px; /* [cite: 177] */
+}

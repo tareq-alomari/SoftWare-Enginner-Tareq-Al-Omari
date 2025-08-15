@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إدارة المدارس</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="{% static 'images/m.png' %}" alt="SpeakNow Logo" width="50" height="50">
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المعلمين</a></li>
+                <li><a href="#">الطلاب</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Eng: Tareq Al-Omari</p>
+    </footer>
+</body>
+</html>
