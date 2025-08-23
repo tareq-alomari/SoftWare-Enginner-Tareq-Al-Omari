@@ -1,0 +1,73 @@
+<!-- templates/insert_student.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">إضافة طالب جديد</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="f_name">الاسم الأول</label>
+                <input type="text" class="form-control" id="f_name" name="f_name" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="l_name">الاسم الأخير</label>
+                <input type="text" class="form-control" id="l_name" name="l_name" required>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group mb-3">
+                <label for="age">العمر</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group mb-3">
+                <label for="level">المرحلة الجامعية</label>
+                <select class="form-control" id="level" name="level" required>
+                    <option value="">-- اختر المرحلة --</option>
+                    <option value="1st">الأولى</option>
+                    <option value="2nd">الثانية</option>
+                    <option value="3rd">الثالثة</option>
+                    <option value="4th">الرابعة</option>
+                    <option value="5th">الخامسة</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group mb-3">
+                <label for="gpa">المعدل (GPA)</label>
+                <input type="number" step="0.01" class="form-control" id="gpa" name="gpa" required>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="status">حالة الطالب</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="status" name="status" checked>
+                    <label class="form-check-label" for="status">منتظم</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="report">تقرير حالة الطالب</label>
+                <textarea class="form-control" id="report" name="report" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-success">حفظ</button>
+    <a href="{% url 'student:students' %}" class="btn btn-secondary">إلغاء</a>
+</form>
+{% endblock %}

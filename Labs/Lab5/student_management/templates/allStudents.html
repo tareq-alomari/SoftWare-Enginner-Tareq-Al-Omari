@@ -1,0 +1,41 @@
+<!-- templates/allStudents.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">قائمة الطلاب</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>الاسم الأول</th>
+            <th>الاسم الأخير</th>
+            <th>العمر</th>
+            <th>المرحلة الجامعية</th>
+            <th>المعدل</th>
+            <th>منتظم</th>
+            <th>ملاحظة</th>
+            <th>تحكم</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.f_name }}</td>
+            <td>{{ student.l_name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.level }}</td>
+            <td>{{ student.gpa }}</td>
+            <td>{% if student.status %} نعم {% else %} لا {% endif %}</td>
+            <td>{{ student.report|default:"-" }}</td>
+            <td>
+                <a href="{% url 'student:student_one' student.id %}" class="btn btn-sm btn-info">عرض</a>
+                <a href="{% url 'student:edit' student.id %}" class="btn btn-sm btn-warning">تعديل</a>
+                <a href="{% url 'student:delete' student.id %}" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p class="mt-3"><strong>المجموع:</strong> {{ students_count }}</p>
+{% endblock %}

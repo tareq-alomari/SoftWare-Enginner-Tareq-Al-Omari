@@ -1,0 +1,23 @@
+<!-- templates/student_one.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">تفاصيل الطالب</h2>
+
+<div class="card border-primary mb-3">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title">{{ student.id }} - {{ student.f_name }} {{ student.l_name }}</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text"><strong>العمر:</strong> {{ student.age }}</p>
+        <p class="card-text"><strong>المرحلة الجامعية:</strong> {{ student.level }}</p>
+        <p class="card-text"><strong>المعدل:</strong> {{ student.gpa }}</p>
+        <p class="card-text"><strong>الحالة:</strong> {% if student.status %} منتظم {% else %} غير منتظم {% endif %}</p>
+        <p class="card-text"><strong>التقرير:</strong> {{ student.report|default:"لا يوجد" }}</p>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'student:edit' student.id %}" class="btn btn-warning">تعديل</a>
+        <a href="{% url 'student:students' %}" class="btn btn-secondary">العودة للقائمة</a>
+    </div>
+</div>
+{% endblock %}

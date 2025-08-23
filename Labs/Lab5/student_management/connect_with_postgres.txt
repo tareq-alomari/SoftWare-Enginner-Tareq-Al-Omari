@@ -1,0 +1,217 @@
+# ربط مشروع Django بـ PostgreSQL
+
+سأوضح لك كيفية ربط مشروعك بقاعدة بيانات PostgreSQL بدلاً من SQLite الافتراضية.
+
+## الخطوة 1: تثبيت الحزم المطلوبة
+
+```bash
+pip install psycopg2-binary
+```
+
+## الخطوة 2: إنشاء قاعدة بيانات PostgreSQL
+
+1. افتح pgAdmin أو أي أداة أخرى لإدارة PostgreSQL
+2. أنشئ قاعدة بيانات جديدة باسم `school_management`
+3. أو استخدم سطر الأوامر:
+```sql
+CREATE DATABASE school_management;
+```
+
+## الخطوة 3: تحديث إعدادات قاعدة البيانات
+
+في ملف `settings.py`، قم بتحديث إعدادات قاعدة البيانات:
+
+```python
+# student_management/settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'school_management',  # اسم قاعدة البيانات
+        'USER': 'postgres',  # اسم المستخدم الافتراضي
+        'PASSWORD': 'your_password',  # كلمة المرور التي حددتها عند تثبيت PostgreSQL
+        'HOST': 'localhost',  # أو عنوان IP الخاص بخادم PostgreSQL
+        'PORT': '5432',  # البورت الافتراضي لـ PostgreSQL
+    }
+}
+```
+
+## الخطوة 4: إعداد متغيرات البيئة (اختياري ولكن موصى به)
+
+لأسباب أمنية، من الأفضل تخزين معلومات الاتصال بقاعدة البيانات في متغيرات البيئة:
+
+### الطريقة 1: استخدام python-decouple
+
+```bash
+pip install python-decouple
+```
+
+أنشئ ملف `.env` في مجلد المشروع الرئيسي:
+
+```ini
+# .env
+DB_NAME=school_management
+DB_USER=postgres
+DB_PASSWORD=your_secure_password
+DB_HOST=localhost
+DB_PORT=5432
+```
+
+ثم عدل `settings.py`:
+
+```python
+# student_management/settings.py
+from decouple import config
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+    }
+}
+```
+
+### الطريقة 2: استخدام متغيرات البيئة مباشرة
+
+```python
+# student_management/settings.py
+import os
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'school_management'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
+}
+```
+
+## الخطوة 5: إنشاء الجداول من جديد
+
+نظرًا لأننا ننتقل إلى قاعدة بيانات جديدة، نحتاج إلى إنشاء الجداول من جديد:
+
+```bash
+# إنشاء التهجيرات
+python manage.py makemigrations
+
+# تطبيق التهجيرات على PostgreSQL
+python manage.py migrate
+```
+
+## الخطوة 6: إنشاء مستخدم superuser جديد
+
+```bash
+python manage.py createsuperuser
+```
+
+## الخطوة 7: اختبار الاتصال
+
+تشغيل الخادم واختبار أن كل شيء يعمل:
+
+```bash
+python manage.py runserver
+```
+
+## الخطوة 8: إضافة بيانات تجريبية (اختياري)
+
+يمكنك إنشاء ملف `populate_data.py` لإضافة بيانات تجريبية:
+
+```python
+# populate_data.py
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'student_management.settings')
+django.setup()
+
+from students.models import Student
+from teachers.models import Teacher
+
+# بيانات تجريبية للطلاب
+students_data = [
+    {'f_name': 'أحمد', 'l_name': 'محمد', 'age': 20, 'level': '2nd', 'gpa': 3.5, 'status': True},
+    {'f_name': 'فاطمة', 'l_name': 'علي', 'age': 21, 'level': '3rd', 'gpa': 3.8, 'status': True},
+    {'f_name': 'يوسف', 'l_name': 'إبراهيم', 'age': 19, 'level': '1st', 'gpa': 3.2, 'status': True},
+]
+
+# بيانات تجريبية للمعلمين
+teachers_data = [
+    {'f_name': 'د. محمد', 'l_name': 'السعدي', 'age': 45, 'specialty': 'الرياضيات', 'years_of_experience': 15, 'salary': 5000},
+    {'f_name': 'أ. سارة', 'l_name': 'الفهيد', 'age': 35, 'specialty': 'اللغة العربية', 'years_of_experience': 8, 'salary': 4000},
+    {'f_name': 'د. خالد', 'l_name': 'النجار', 'age': 50, 'specialty': 'الفيزياء', 'years_of_experience': 20, 'salary': 6000},
+]
+
+# إضافة البيانات
+for student_data in students_data:
+    Student.objects.create(**student_data)
+
+for teacher_data in teachers_data:
+    Teacher.objects.create(**teacher_data)
+
+print("تم إضافة البيانات التجريبية بنجاح!")
+```
+
+تشغيل الملف:
+```bash
+python populate_data.py
+```
+
+## الخطوة 9: إعدادات إضافية لتحسين الأداء
+
+يمكنك إضافة هذه الإعدادات إلى `settings.py` لتحسين أداء PostgreSQL:
+
+```python
+# student_management/settings.py
+# إعدادات إضافية لتحسين أداء PostgreSQL
+DATABASES['default']['OPTIONS'] = {
+    'client_encoding': 'UTF8',
+    'default_transaction_isolation': 'read committed',
+    'timezone': 'Asia/Riyadh',
+}
+
+# إعدادات التخزين المؤقت
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'django_cache_table',
+    }
+}
+
+# إنشاء جدول التخزين المؤقت
+python manage.py createcachetable
+```
+
+## الخطوة 10: نسخ احتياطي للبيانات (اختياري)
+
+إذا كان لديك بيانات في SQLite وتريد نقلها إلى PostgreSQL:
+
+1. تصدير البيانات من SQLite:
+```bash
+python manage.py dumpdata > datadump.json
+```
+
+2. بعد التهجير إلى PostgreSQL، استيراد البيانات:
+```bash
+python manage.py loaddata datadump.json
+```
+
+## ملاحظات مهمة:
+
+1. تأكد من أن خدمة PostgreSQL تعمل على جهازك
+2. تأكد من أن المستخدم لديه صلاحية الوصول إلى قاعدة البيانات
+3. إذا واجهت مشاكل في الاتصال، تحقق من:
+   - كلمة المرور
+   - إعدادات المصادقة في `pg_hba.conf`
+   - أن قاعدة البيانات موجودة
+4. بالنسبة للإنتاج، استخدم إعدادات أكثر أمانًا:
+   - اتصال SSL
+   - تجنب استخدام المستخدم root
+   - استخدام مستخدم مخصص للتطبيق فقط
+
+الآن يجب أن يكون مشروعك متصلاً بـ PostgreSQL ويعمل بشكل صحيح!
