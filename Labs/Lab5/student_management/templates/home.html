@@ -1,0 +1,69 @@
+<!-- templates/home.html (تحديث) -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="welcome-box">
+    <h1>مرحباً بك في نظام إدارة المدرسة</h1>
+    <p>يمكنك إدارة سجلات الطلاب والمعلمين والمواد الدراسية بسهولة من خلال هذا النظام</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">الطلاب</h5>
+                <p class="card-text">إجمالي عدد الطلاب: {{ students_count }}</p>
+                <a href="{% url 'student:students' %}" class="btn btn-primary">عرض الطلاب</a>
+                <a href="{% url 'student:newStudent' %}" class="btn btn-success">إضافة طالب</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">المعلمون</h5>
+                <p class="card-text">إجمالي عدد المعلمين: {{ teachers_count }}</p>
+                <a href="{% url 'teacher:teachers' %}" class="btn btn-primary">عرض المعلمين</a>
+                <a href="{% url 'teacher:new_teacher' %}" class="btn btn-success">إضافة معلم</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">المواد الدراسية</h5>
+                <p class="card-text">إجمالي عدد المواد: {{ courses_count }}</p>
+                <a href="{% url 'course:course_list' %}" class="btn btn-primary">عرض المواد</a>
+                <a href="{% url 'course:course_create' %}" class="btn btn-success">إضافة مادة</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">استعلامات الطلاب</h5>
+                <a href="{% url 'student:queries' %}" class="btn btn-info">استعلامات الطلاب</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">استعلامات المعلمين</h5>
+                <a href="{% url 'teacher:teachers_queries' %}" class="btn btn-info">استعلامات المعلمين</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">استعلامات المواد</h5>
+                <a href="{% url 'course:course_queries' %}" class="btn btn-info">استعلامات المواد</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

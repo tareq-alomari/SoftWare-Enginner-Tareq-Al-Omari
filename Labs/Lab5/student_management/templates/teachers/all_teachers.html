@@ -1,0 +1,43 @@
+<!-- templates/teachers/all_teachers.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">قائمة المعلمين</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>الاسم الأول</th>
+            <th>الاسم الأخير</th>
+            <th>العمر</th>
+            <th>التخصص</th>
+            <th>سنوات الخبرة</th>
+            <th>الراتب</th>
+            <th>نشط</th>
+            <th>ملاحظات</th>
+            <th>تحكم</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.f_name }}</td>
+            <td>{{ teacher.l_name }}</td>
+            <td>{{ teacher.age }}</td>
+            <td>{{ teacher.specialty }}</td>
+            <td>{{ teacher.years_of_experience }}</td>
+            <td>{{ teacher.salary }}</td>
+            <td>{% if teacher.is_active %} نعم {% else %} لا {% endif %}</td>
+            <td>{{ teacher.notes|default:"-" }}</td>
+            <td>
+                <a href="{% url 'teacher:teacher_one' teacher.id %}" class="btn btn-sm btn-info">عرض</a>
+                <a href="{% url 'teacher:edit_teacher' teacher.id %}" class="btn btn-sm btn-warning">تعديل</a>
+                <a href="{% url 'teacher:delete_teacher' teacher.id %}" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من حذف المعلم؟')">حذف</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p class="mt-3"><strong>المجموع:</strong> {{ teachers_count }}</p>
+{% endblock %}

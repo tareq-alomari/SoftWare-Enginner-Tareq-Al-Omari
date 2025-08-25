@@ -1,0 +1,119 @@
+<!-- templates/courses/course_queries.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">نتائج استعلامات المواد الدراسية</h2>
+
+<div class="accordion" id="coursesQueriesAccordion">
+    <!-- المواد المفعلة -->
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActive">
+                المواد الدراسية المفعلة ({{ active_courses.count }})
+            </button>
+        </h2>
+        <div id="collapseActive" class="accordion-collapse collapse show" data-bs-parent="#coursesQueriesAccordion">
+            <div class="accordion-body">
+                {% if active_courses %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>كود المادة</th>
+                            <th>اسم المادة</th>
+                            <th>المستوى</th>
+                            <th>الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in active_courses %}
+                        <tr>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.get_level_display }}</td>
+                            <td>{{ course.credit_hours }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-center">لا توجد مواد دراسية مفعلة</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- المواد حسب المستوى -->
+    {% for level_name, courses in level_courses.items %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}">
+                مواد مستوى {{ level_name }} ({{ courses.count }})
+            </button>
+        </h2>
+        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#coursesQueriesAccordion">
+            <div class="accordion-body">
+                {% if courses %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>كود المادة</th>
+                            <th>اسم المادة</th>
+                            <th>الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.credit_hours }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-center">لا توجد مواد لمستوى {{ level_name }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <!-- مواد ذات ساعات معتمدة عالية -->
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHighCredit">
+                مواد ذات ساعات معتمدة أكثر من 3 ({{ high_credit_courses.count }})
+            </button>
+        </h2>
+        <div id="collapseHighCredit" class="accordion-collapse collapse" data-bs-parent="#coursesQueriesAccordion">
+            <div class="accordion-body">
+                {% if high_credit_courses %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>كود المادة</th>
+                            <th>اسم المادة</th>
+                            <th>المستوى</th>
+                            <th>الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in high_credit_courses %}
+                        <tr>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.get_level_display }}</td>
+                            <td>{{ course.credit_hours }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-center">لا توجد مواد ذات ساعات معتمدة أكثر من 3</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
