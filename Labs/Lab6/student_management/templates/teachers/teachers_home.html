@@ -1,0 +1,39 @@
+<!-- templates/teachers/teachers_home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="welcome-box">
+    <h1>مرحباً بك في نظام إدارة المعلمين</h1>
+    <p>يمكنك إدارة سجلات المعلمين بسهولة من خلال هذا النظام</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">عرض المعلمين</h5>
+                <p class="card-text">عرض جميع المعلمين المسجلين في النظام</p>
+                <a href="{% url 'teacher:teachers' %}" class="btn btn-primary">عرض المعلمين</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">إضافة معلم</h5>
+                <p class="card-text">إضافة معلم جديد إلى النظام</p>
+                <a href="{% url 'teacher:new_teacher' %}" class="btn btn-success">إضافة معلم</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">استعلامات المعلمين</h5>
+                <p class="card-text">استعلامات متقدمة على بيانات المعلمين</p>
+                <a href="{% url 'teacher:teachers_queries' %}" class="btn btn-info">الاستعلامات</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

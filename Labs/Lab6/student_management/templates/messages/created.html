@@ -1,0 +1,12 @@
+<!-- templates/messages/created.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-success text-center" role="alert">
+    <h4 class="alert-heading">تمت العملية بنجاح!</h4>
+    <p>تم إضافة الطالب بنجاح.</p>
+    <hr>
+    <a href="{% url 'student:students' %}" class="btn btn-primary">عرض قائمة الطلاب</a>
+    <a href="{% url 'student:newStudent' %}" class="btn btn-success">إضافة طالب آخر</a>
+</div>
+{% endblock %}

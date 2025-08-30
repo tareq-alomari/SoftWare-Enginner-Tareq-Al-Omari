@@ -1,0 +1,40 @@
+<!-- templates/courses/course_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">تفاصيل المادة الدراسية</h2>
+
+<div class="card border-primary mb-3">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title">{{ course.name }} ({{ course.code }})</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="card-text"><strong>كود المادة:</strong> {{ course.code }}</p>
+                <p class="card-text"><strong>اسم المادة:</strong> {{ course.name }}</p>
+                <p class="card-text"><strong>المستوى:</strong> {{ course.get_level_display }}</p>
+            </div>
+            <div class="col-md-6">
+                <p class="card-text"><strong>الساعات المعتمدة:</strong> {{ course.credit_hours }}</p>
+                <p class="card-text"><strong>الحالة:</strong> 
+                    <span class="badge {% if course.is_active %}bg-success{% else %}bg-danger{% endif %}">
+                        {% if course.is_active %}مفعلة{% else %}غير مفعلة{% endif %}
+                    </span>
+                </p>
+                <p class="card-text"><strong>تاريخ الإنشاء:</strong> {{ course.created_at|date:"Y-m-d" }}</p>
+            </div>
+        </div>
+        
+        {% if course.description %}
+        <hr>
+        <p class="card-text"><strong>وصف المادة:</strong></p>
+        <p class="card-text">{{ course.description }}</p>
+        {% endif %}
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'course:course_update' course.id %}" class="btn btn-warning">تعديل</a>
+        <a href="{% url 'course:course_list' %}" class="btn btn-secondary">العودة للقائمة</a>
+    </div>
+</div>
+{% endblock %}

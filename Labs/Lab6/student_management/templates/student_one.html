@@ -1,0 +1,44 @@
+<!-- templates/student_one.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">تفاصيل الطالب</h2>
+
+<div class="card shadow-sm mb-4">
+    <div class="row g-0">
+        <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
+            {% if student.image %}
+                <img src="{{ student.image.url }}" class="img-fluid rounded-circle" alt="صورة {{ student.f_name }}" style="max-width: 200px; height: 200px; object-fit: cover;">
+            {% else %}
+                <div class="text-center text-muted">لا توجد صورة</div>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 class="card-title border-bottom pb-2 mb-3">{{ student.id }} - {{ student.f_name }} {{ student.l_name }}</h3>
+                <p class="card-text"><strong>العمر:</strong> {{ student.age }}</p>
+                <p class="card-text"><strong>المرحلة الجامعية:</strong> {{ student.level }}</p>
+                <p class="card-text"><strong>المعدل:</strong> {{ student.gpa }}</p>
+                <p class="card-text"><strong>الحالة:</strong> {% if student.status %} <span class="badge bg-success">منتظم</span> {% else %} <span class="badge bg-danger">غير منتظم</span> {% endif %}</p>
+                <p class="card-text"><strong>التقرير:</strong> {{ student.report|default:"لا يوجد" }}</p>
+                
+                {% if student.image %}
+                <div class="mt-4">
+                    <h5>معلومات الصورة:</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>العرض:</strong> {{ student.image.width }} px</li>
+                        <li class="list-group-item"><strong>الارتفاع:</strong> {{ student.image.height }} px</li>
+                        <li class="list-group-item"><strong>الحجم:</strong> {{ student.image.size|filesizeformat }}</li>
+                    </ul>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-light text-end">
+        <a href="{% url 'student:edit' student.id %}" class="btn btn-warning">تعديل</a>
+        <a href="{% url 'student:students' %}" class="btn btn-secondary">العودة للقائمة</a>
+    </div>
+</div>
+{% endblock %}
