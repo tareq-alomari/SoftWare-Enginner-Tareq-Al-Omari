@@ -1,0 +1,39 @@
+<!-- {% extends 'base.html' %} -->
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center font-weight-light my-4">تسجيل الدخول</h3>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="text" name="username" class="form-control" id="id_username" placeholder="اسم المستخدم" required>
+                            <label for="id_username">اسم المستخدم</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                             <input type="password" name="password" class="form-control" id="id_password" placeholder="كلمة المرور" required>
+                             <label for="id_password">كلمة المرور</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block">دخول</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="small"><a href="{% url 'user:register' %}">ليس لديك حساب؟ إنشاء حساب جديد</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

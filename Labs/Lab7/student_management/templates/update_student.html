@@ -1,0 +1,95 @@
+<!-- templates/update_student.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">تعديل بيانات الطالب</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="f_name">الاسم الأول</label>
+                <input type="text" class="form-control" id="f_name" name="f_name" value="{{ student.f_name }}" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="l_name">الاسم الأخير</label>
+                <input type="text" class="form-control" id="l_name" name="l_name" value="{{ student.l_name }}" required>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group mb-3">
+                <label for="age">العمر</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ student.age }}" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group mb-3">
+                <label for="level">المرحلة الجامعية</label>
+                <select class="form-control" id="level" name="level" required>
+                    <option value="1st" {% if student.level == "1st" %}selected{% endif %}>الأولى</option>
+                    <option value="2nd" {% if student.level == "2nd" %}selected{% endif %}>الثانية</option>
+                    <option value="3rd" {% if student.level == "3rd" %}selected{% endif %}>الثالثة</option>
+                    <option value="4th" {% if student.level == "4th" %}selected{% endif %}>الرابعة</option>
+                    <option value="5th" {% if student.level == "5th" %}selected{% endif %}>الخامسة</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group mb-3">
+                <label for="gpa">المعدل (GPA)</label>
+                <input type="number" step="0.01" class="form-control" id="gpa" name="gpa" value="{{ student.gpa }}" required>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="status">حالة الطالب</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="status" name="status" {% if student.status %}checked{% endif %}>
+                    <label class="form-check-label" for="status">منتظم</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="report">تقرير حالة الطالب</label>
+                <textarea class="form-control" id="report" name="report" rows="3">{{ student.report }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- عرض الصورة الحالية مع إمكانية التغيير -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="image">الصورة الشخصية</label><br>
+                {% if student.image %}
+                    <img src="{{ student.image.url }}" alt="صورة الطالب" class="img-thumbnail mb-2" width="120">
+                {% endif %}
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-group mb-3">
+                <label for="file_report">ملف التقرير</label><br>
+                {% if student.file_report %}
+                    <a href="{{ student.file_report.url }}" target="_blank" class="btn btn-outline-info btn-sm mb-2">عرض التقرير الحالي</a>
+                {% endif %}
+                <input type="file" class="form-control" id="file_report" name="file_report">
+            </div>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">تحديث</button>
+    <a href="{% url 'student:students' %}" class="btn btn-secondary">إلغاء</a>
+</form>
+{% endblock %}

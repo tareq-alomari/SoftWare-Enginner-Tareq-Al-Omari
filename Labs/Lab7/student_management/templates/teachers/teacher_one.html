@@ -1,0 +1,24 @@
+<!-- templates/teachers/teacher_one.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">تفاصيل المعلم</h2>
+
+<div class="card border-primary mb-3">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title">{{ teacher.id }} - {{ teacher.f_name }} {{ teacher.l_name }}</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text"><strong>العمر:</strong> {{ teacher.age }}</p>
+        <p class="card-text"><strong>التخصص:</strong> {{ teacher.specialty }}</p>
+        <p class="card-text"><strong>سنوات الخبرة:</strong> {{ teacher.years_of_experience }}</p>
+        <p class="card-text"><strong>الراتب:</strong> {{ teacher.salary }}</p>
+        <p class="card-text"><strong>الحالة:</strong> {% if teacher.is_active %} نشط {% else %} غير نشط {% endif %}</p>
+        <p class="card-text"><strong>الملاحظات:</strong> {{ teacher.notes|default:"لا يوجد" }}</p>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'teacher:edit_teacher' teacher.id %}" class="btn btn-warning">تعديل</a>
+        <a href="{% url 'teacher:teachers' %}" class="btn btn-secondary">العودة للقائمة</a>
+    </div>
+</div>
+{% endblock %}

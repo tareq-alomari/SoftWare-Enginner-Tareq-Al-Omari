@@ -1,0 +1,39 @@
+<!-- templates/courses/courses_home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="welcome-box">
+    <h1>مرحباً بك في نظام إدارة المواد الدراسية</h1>
+    <p>يمكنك إدارة سجلات المواد الدراسية بسهولة من خلال هذا النظام</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">عرض المواد الدراسية</h5>
+                <p class="card-text">عرض جميع المواد الدراسية المسجلة في النظام</p>
+                <a href="{% url 'course:course_list' %}" class="btn btn-primary">عرض المواد</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">إضافة مادة دراسية</h5>
+                <p class="card-text">إضافة مادة دراسية جديدة إلى النظام</p>
+                <a href="{% url 'course:course_create' %}" class="btn btn-success">إضافة مادة</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">استعلامات المواد</h5>
+                <p class="card-text">استعلامات متقدمة على بيانات المواد الدراسية</p>
+                <a href="{% url 'course:course_queries' %}" class="btn btn-info">الاستعلامات</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
