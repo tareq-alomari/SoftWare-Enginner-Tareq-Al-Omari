@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرحباً بك</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; padding: 20px; text-align: center; }
+        .container { background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 30px; max-width: 600px; margin: 0 auto; }
+        h1 { color: #007bff; }
+        p { line-height: 1.6; }
+        .footer { margin-top: 20px; font-size: 0.9em; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مرحباً بك يا {{ username }}!</h1>
+        <p>شكراً لانضمامك إلى منصتنا. يسعدنا وجودك معنا.</p>
+        <p>إذا كان لديك أي أسئلة، فلا تتردد في التواصل مع فريق الدعم لدينا.</p>
+        <p>نتمنى لك تجربة ممتعة!</p>
+        <div class="footer">
+            <p>&copy; {{ year }} نظام إدارة المدرسة. جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+</body>
+</html>
